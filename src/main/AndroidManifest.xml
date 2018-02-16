@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.harsh.proj5_fedcash">
-    <uses-permission android:name="course.examples.Services.KeyService.GEN_ID" />
+    package="com.example.harsh.proj5_treasury">
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="25" />
+
+    <permission android:name="course.examples.Services.KeyService.GEN_ID"></permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher">
+        <service
+            android:name=".TreasuryService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="course.examples.Services.KeyService.GEN_ID"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.example.harsh.KeyCommon.KeyGenerator" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".StatusActivity"
+            android:label="@string/title_activity_status"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
         </activity>
-        <activity
-            android:name=".APIViewerActivity"
-            android:label="@string/title_activity_apiviewer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
